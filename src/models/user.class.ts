@@ -1,4 +1,7 @@
 export class User {
+    getTime(): Date {
+      throw new Error('Method not implemented.');
+    }
     firstName!: string;
     lastName!: string;
     birthDate!: number;
@@ -14,4 +17,15 @@ export class User {
         this.zipCode = obj ? obj.zipCode : '';
         this.city = obj ? obj.city : '';
     }
+
+    public toJson() {
+        return {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            birthDate: this.birthDate,
+            street: this.street,
+            zipCode: this.zipCode,
+            city: this.city
+        }
+    };
 }
