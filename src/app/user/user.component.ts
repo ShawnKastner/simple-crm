@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user.component.scss']
 })
 
-export class UserComponent implements OnInit{
+export class UserComponent implements OnInit {
   private firestore: Firestore = inject(Firestore);
   user = new User();
   users$!: Observable<any>;
@@ -21,8 +21,8 @@ export class UserComponent implements OnInit{
 
   ngOnInit(): void {
     const userCollection = collection(this.firestore, 'users');
-    this.users$ = collectionData(userCollection);
-
+    this.users$ = collectionData(userCollection, { idField: 'uid' });
+    // subscribe changes and push it in array
     this.users$.subscribe((changes: any) => {
       console.log('Received changes from DB', changes);
       this.allUsers = changes;

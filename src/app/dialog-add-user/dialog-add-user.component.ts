@@ -10,7 +10,7 @@ import { Firestore, addDoc, collection } from '@angular/fire/firestore';
 })
 export class DialogAddUserComponent {
   user = new User();
-  birthDate: Date = new Date;
+  birthDate!: Date;
   private firestore: Firestore = inject(Firestore);
   loading = false;
 
