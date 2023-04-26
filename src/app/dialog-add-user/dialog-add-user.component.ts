@@ -12,6 +12,7 @@ export class DialogAddUserComponent {
   user = new User();
   birthDate: Date = new Date;
   private firestore: Firestore = inject(Firestore);
+  loading = false;
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddUserComponent>) { }
@@ -22,8 +23,10 @@ export class DialogAddUserComponent {
 
   saveUser() {
     this.user.birthDate = this.birthDate.getTime();
+    this.loading = true;
     // Adding user to Firestore
     addDoc(collection(this.firestore, 'users'), this.user.toJson()).then(() => {
+      this.loading = false;
       console.log('Adding user finished', this.user);
     })
   }
