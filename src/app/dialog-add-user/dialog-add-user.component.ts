@@ -27,6 +27,7 @@ export class DialogAddUserComponent {
     // Adding user to Firestore
     addDoc(collection(this.firestore, 'users'), this.user.toJson()).then(() => {
       this.loading = false;
+      this.dialogRef.close();
       console.log('Adding user finished', this.user);
     })
   }
