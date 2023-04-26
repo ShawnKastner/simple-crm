@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { User } from 'src/models/user.class';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -9,11 +11,23 @@ import { User } from 'src/models/user.class';
   styleUrls: ['./user.component.scss']
 })
 
-export class UserComponent {
-
+export class UserComponent implements OnInit{
+  private firestore: Firestore = inject(Firestore);
   user = new User();
+  users$!: Observable<any>;
+  allUsers!: Array<any>;
 
   constructor(public dialog: MatDialog) { }
+
+  ngOnInit(): void {
+    const userCollection = collection(this.firestore, 'users');
+    this.users$ = collectionData(userCollection);
+
+    this.users$.subscribe((changes: any) => {
+      console.log('Received changes from DB', changes);
+      this.allUsers = changes;
+    });
+  }
 
   openDialog(): void {
     this.dialog.open(DialogAddUserComponent, {
