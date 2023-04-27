@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Firestore, collection, doc, docData } from '@angular/fire/firestore';
+import { Firestore, Timestamp, collection, doc, docData } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -16,7 +16,9 @@ export class UserDetailComponent implements OnInit {
   private firestore: Firestore = inject(Firestore);
   userId!: any;
   user: User = new User();
-  user$!: Observable<any>
+  user$!: Observable<any>;
+  birthDate!: string;
+
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog) { }
 
@@ -25,7 +27,7 @@ export class UserDetailComponent implements OnInit {
       this.userId = paramMap.get('id');
       // console.log('ID is:', this.userId);
       this.getUser();
-   });
+    });
   }
 
   getUser() {
@@ -35,6 +37,7 @@ export class UserDetailComponent implements OnInit {
     this.user$.subscribe((user: any) => {
       this.user = new User(user);
       // console.log('Retrieved user', this.user);
+      this.birthDate = new Date(this.user.birthDate).toLocaleDateString();
     });
   }
 

@@ -18,6 +18,7 @@ export class DialogEditUserComponent {
   constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>) { }
 
   saveUser() {
+    this.user.birthDate = this.birthDate.getTime();
     this.loading = true;
     const userCollection = collection(this.firestore, 'users')
     const docRef = doc(userCollection, this.userId);
