@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Firestore, Timestamp, collection, doc, docData } from '@angular/fire/firestore';
+import { Firestore, Timestamp, collection, deleteDoc, doc, docData } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -31,7 +31,7 @@ export class UserDetailComponent implements OnInit {
   }
 
   getUser() {
-    const userColl = collection(this.firestore, 'users')
+    const userColl = collection(this.firestore, 'users');
     const docRef = doc(userColl, this.userId);
     this.user$ = docData(docRef)
     this.user$.subscribe((user: any) => {
@@ -39,6 +39,12 @@ export class UserDetailComponent implements OnInit {
       // console.log('Retrieved user', this.user);
       this.birthDate = new Date(this.user.birthDate).toLocaleDateString();
     });
+  }
+
+  deleteUser() {
+    const userColl = collection(this.firestore, 'users');
+    const docRef = doc(userColl, this.userId)
+    deleteDoc(docRef)
   }
 
   openEditAdressDialog(): void {
