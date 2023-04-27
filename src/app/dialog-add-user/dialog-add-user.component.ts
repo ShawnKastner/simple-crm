@@ -13,15 +13,30 @@ export class DialogAddUserComponent {
   birthDate!: Date;
   private firestore: Firestore = inject(Firestore);
   loading = false;
+  inputMissing = false;
 
   constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) { }
 
   saveUser() {
-    this.user.birthDate = this.birthDate.getTime();
-    this.loading = true;
-    addDoc(collection(this.firestore, 'users'), this.user.toJSON()).then(() => {
-      this.loading = false;
-      this.dialogRef.close();
-    })
+    if (this.emptyInput()) {
+      this.user.birthDate = this.birthDate.getTime();
+      this.loading = true;
+      addDoc(collection(this.firestore, 'users'), this.user.toJSON()).then(() => {
+        this.loading = false;
+        this.dialogRef.close();
+      })
+    } else {
+      this.inputMissing = true;
+    }
+  }
+
+  emptyInput() {
+    return (
+      this.user.firstName != ''
+      && this.user.lastName != ''
+      && this.user.birthDate != undefined
+      && this.user.street != ''
+      && this.user.zipCode > 0
+      && this.user.city != '')
   }
 }  

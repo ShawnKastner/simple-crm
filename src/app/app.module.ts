@@ -57,7 +57,7 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
     FormsModule,
     MatProgressBarModule,
     MatCardModule,
-    MatMenuModule
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
