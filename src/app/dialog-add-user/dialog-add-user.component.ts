@@ -19,11 +19,9 @@ export class DialogAddUserComponent {
   saveUser() {
     this.user.birthDate = this.birthDate.getTime();
     this.loading = true;
-    // Adding user to Firestore
-    addDoc(collection(this.firestore, 'users'), this.user.toJson()).then(() => {
+    addDoc(collection(this.firestore, 'users'), this.user.toJSON()).then(() => {
       this.loading = false;
       this.dialogRef.close();
-      console.log('Adding user finished', this.user);
     })
   }
 }  

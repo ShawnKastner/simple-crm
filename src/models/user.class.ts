@@ -17,7 +17,7 @@ export class User {
         this.city = obj ? obj.city : '';
     }
 
-    public toJson() {
+    public toJSON() {
         return {
             firstName: this.firstName,
             lastName: this.lastName,
