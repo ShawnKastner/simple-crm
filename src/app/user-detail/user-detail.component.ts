@@ -31,9 +31,7 @@ export class UserDetailComponent implements OnInit {
     this.user$ = docData(docRef)
     this.user$.subscribe((user: any) => {
       this.user = new User(user);
-      console.log('Retrieved user', this.user);
-      
+      // console.log('Retrieved user', this.user);
     });
   }
-
 }

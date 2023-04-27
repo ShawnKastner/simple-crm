@@ -24,6 +24,7 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatCardModule } from '@angular/material/card';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     UserComponent,
     DashboardComponent,
     DialogAddUserComponent,
-    UserDetailComponent
+    UserDetailComponent,
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -51,7 +52,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     MatNativeDateModule,
     FormsModule,
     MatProgressBarModule,
-    MatCardModule
+    MatCardModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -24,7 +24,7 @@ export class UserComponent implements OnInit {
     this.users$ = collectionData(userCollection, { idField: 'uid' });
     // subscribe changes and push it in array
     this.users$.subscribe((changes: any) => {
-      console.log('Received changes from DB', changes);
+      // console.log('Received changes from DB', changes);
       this.allUsers = changes;
     });
   }
