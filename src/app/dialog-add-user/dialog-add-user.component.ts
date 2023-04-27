@@ -14,12 +14,7 @@ export class DialogAddUserComponent {
   private firestore: Firestore = inject(Firestore);
   loading = false;
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogAddUserComponent>) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
+  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) { }
 
   saveUser() {
     this.user.birthDate = this.birthDate.getTime();
