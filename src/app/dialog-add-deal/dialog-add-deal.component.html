@@ -2,25 +2,26 @@
 <h1 mat-dialog-title>Add Deal</h1>
 <div class="pt-8" mat-dialog-content>
     <div>
-        <mat-form-field>
-            <mat-label>Select an option</mat-label>
-            <mat-select [(ngModel)]="deal.user">
-                <mat-option *ngFor="let user of users" [value]="user">{{ user.email }}</mat-option>
+        <mat-form-field class="full-width">
+            <mat-label>Select a user</mat-label>
+            <mat-select placeholder="Select a user" [(ngModel)]="deal.user">
+                <mat-option *ngFor="let user of users" [value]="user" required>{{ user.email }}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
     <div>
-        <mat-form-field [ariaDisabled]="loading" class="mr-16" appearance="outline">
+        <mat-form-field class="full-width" [ariaDisabled]="loading" appearance="outline">
             <mat-label>Enter topic of the deal</mat-label>
-            <input [(ngModel)]="deal.topic" matInput placeholder="Enter topic of the deal">
+            <input [(ngModel)]="deal.topic" matInput required placeholder="Enter topic of the deal">
         </mat-form-field>
     </div>
     <div>
-        <mat-form-field [ariaDisabled]="loading" appearance="outline">
-            <mat-label>Enter charged amount</mat-label>
-            <input [(ngModel)]="deal.amount" matInput placeholder="Enter the charged amount">
+        <mat-form-field class="full-width" [ariaDisabled]="loading" appearance="outline">
+            <mat-label>Enter a charged amount</mat-label>
+            <input [(ngModel)]="deal.amount" matInput required placeholder="Enter the charged amount">
         </mat-form-field>
     </div>
+    <span *ngIf="missingInput" class="error-alert">Some entries are missing!</span>
 </div>
 
 

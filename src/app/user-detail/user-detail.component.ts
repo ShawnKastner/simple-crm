@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Firestore, Timestamp, collection, deleteDoc, doc, docData } from '@angular/fire/firestore';
+import { Firestore, collection, deleteDoc, doc, docData } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';

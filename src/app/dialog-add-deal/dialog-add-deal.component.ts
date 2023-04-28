@@ -13,6 +13,7 @@ export class DialogAddDealComponent {
   loading = false;
   deal = new Deal();
   users!: { email: string; firstName: string; lastName: string; }[];
+  missingInput = false;
 
   constructor(public dialogRef: MatDialogRef<DialogAddDealComponent>) {
     this.getUsers().then(user => {
@@ -33,13 +34,25 @@ export class DialogAddDealComponent {
       };
     });
   }
-  
+
 
 
   saveDeal() {
-    addDoc(collection(this.firestore, 'deals'), this.deal.toJSON()).then(() => {
-      this.loading = false;
-      this.dialogRef.close();
-    })
+    if (this.emptyInput()) {
+      addDoc(collection(this.firestore, 'deals'), this.deal.toJSON()).then(() => {
+        this.loading = false;
+        this.dialogRef.close();
+      })
+    } else {
+      this.missingInput = true;
+    }
+  }
+
+  emptyInput() {
+    return (
+      this.deal.amount > 0
+      && this.deal.topic != ''
+      && this.deal.user != ''
+    )
   }
 }

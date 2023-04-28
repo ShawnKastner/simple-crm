@@ -1,16 +1,18 @@
 <h1>Deal overview</h1>
-<mat-card class="deal-card">
+<mat-card *ngFor="let deals of allDeals" class="deal-card mt-32">
     <mat-card-content>
-        <h2>Software Paket A</h2>
+        <h2>{{ deals.topic }}</h2>
         <div class="deal-person-details">
-            <span>Name:</span><br>
-            <span>E-mail:</span><br>
-            <span>Amount:</span>
-        </div>
-        <div>
-            <span></span><br>
-            <span></span><br>
-            <span></span>
+            <div>
+                <span>Name:</span><br>
+                <span>E-mail:</span><br>
+                <span>Amount:</span>
+            </div>
+            <div>
+                <span>{{ deals.user.firstName }} {{ deals.user.lastName }}</span><br>
+                <span>{{ deals.user.email }}</span><br>
+                <span>{{ deals.amount }}€</span>
+            </div>
         </div>
     </mat-card-content>
 </mat-card>

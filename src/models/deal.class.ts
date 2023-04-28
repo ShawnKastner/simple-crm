@@ -1,7 +1,7 @@
 export class Deal {
     topic!: string;
     user!: string;
-    amount!: string;
+    amount!: number;
 
 
     constructor(obj?: any) {
