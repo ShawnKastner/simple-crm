@@ -27,6 +27,9 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { DialogEditAddressComponent } from './dialog-edit-address/dialog-edit-address.component';
 import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
+import { DealsComponent } from './deals/deals.component';
+import { DialogAddDealComponent } from './dialog-add-deal/dialog-add-deal.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,8 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
     UserDetailComponent,
     DialogEditAddressComponent,
     DialogEditUserComponent,
+    DealsComponent,
+    DialogAddDealComponent,
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -58,6 +63,7 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
     MatProgressBarModule,
     MatCardModule,
     MatMenuModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
