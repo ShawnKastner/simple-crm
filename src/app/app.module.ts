@@ -31,6 +31,9 @@ import { DealsComponent } from './deals/deals.component';
 import { DialogAddDealComponent } from './dialog-add-deal/dialog-add-deal.component';
 import { MatSelectModule } from '@angular/material/select';
 import { DialogEditDealComponent } from './dialog-edit-deal/dialog-edit-deal.component';
+import { NewsComponent } from './news/news.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NewsapiService } from './newsapi.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,7 @@ import { DialogEditDealComponent } from './dialog-edit-deal/dialog-edit-deal.com
     DealsComponent,
     DialogAddDealComponent,
     DialogEditDealComponent,
+    NewsComponent,
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -65,9 +69,10 @@ import { DialogEditDealComponent } from './dialog-edit-deal/dialog-edit-deal.com
     MatProgressBarModule,
     MatCardModule,
     MatMenuModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [NewsapiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
