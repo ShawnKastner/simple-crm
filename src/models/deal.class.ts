@@ -5,7 +5,7 @@ export class Deal {
 
 
     constructor(obj?: any) {
-        this.topic = obj ? obj.name: '';
+        this.topic = obj ? obj.topic: '';
         this.user = obj ? obj.user : '';
         this.amount = obj ? obj.amount : '';
     }

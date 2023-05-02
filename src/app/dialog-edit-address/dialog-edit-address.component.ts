@@ -9,12 +9,12 @@ import { User } from 'src/models/user.class';
   styleUrls: ['./dialog-edit-address.component.scss']
 })
 export class DialogEditAddressComponent {
+  private firestore: Firestore = inject(Firestore);
   user!: User;
   loading = false;
-  private firestore: Firestore = inject(Firestore);
   userId!: any;
 
-  constructor(public dialogRef: MatDialogRef<DialogEditAddressComponent>) { }
+  constructor(public dialogRef: MatDialogRef<DialogEditAddressComponent>) {}
 
   saveUser() {
     this.loading = true;

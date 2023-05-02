@@ -30,6 +30,7 @@ import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.com
 import { DealsComponent } from './deals/deals.component';
 import { DialogAddDealComponent } from './dialog-add-deal/dialog-add-deal.component';
 import { MatSelectModule } from '@angular/material/select';
+import { DialogEditDealComponent } from './dialog-edit-deal/dialog-edit-deal.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatSelectModule } from '@angular/material/select';
     DialogEditUserComponent,
     DealsComponent,
     DialogAddDealComponent,
+    DialogEditDealComponent,
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),

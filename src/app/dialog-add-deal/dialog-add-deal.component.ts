@@ -19,7 +19,6 @@ export class DialogAddDealComponent {
     this.getUsers().then(user => {
       this.users = user;
       console.log(this.users);
-
     });
   }
 

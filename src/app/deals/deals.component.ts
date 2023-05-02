@@ -3,18 +3,20 @@ import { DialogAddDealComponent } from '../dialog-add-deal/dialog-add-deal.compo
 import { MatDialog } from '@angular/material/dialog';
 import { Deal } from 'src/models/deal.class';
 import { Observable } from 'rxjs';
-import { Firestore, collection, collectionData, doc, docData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { DialogEditDealComponent } from '../dialog-edit-deal/dialog-edit-deal.component';
 
 @Component({
   selector: 'app-deals',
   templateUrl: './deals.component.html',
   styleUrls: ['./deals.component.scss']
 })
-export class DealsComponent implements OnInit{
+export class DealsComponent implements OnInit {
   private firestore: Firestore = inject(Firestore);
-  deal = new Deal();
+  deal: Deal = new Deal();
   deals$!: Observable<any>;
   allDeals!: Array<any>;
+  dealId!: any;
 
   constructor(public dialog: MatDialog) { }
 
@@ -22,13 +24,28 @@ export class DealsComponent implements OnInit{
     this.dialog.open(DialogAddDealComponent);
   }
 
-  ngOnInit() {
-    const userCollection = collection(this.firestore, 'deals');
-    this.deals$ = collectionData(userCollection);
-    // subscribe changes and push it in array
-    this.deals$.subscribe((changes: any) => {
-      console.log('Received changes from DB', changes);
-      this.allDeals = changes;
+  ngOnInit(): void {
+    this.getDeals();
+    
+  }
+
+  getDeals() {
+    const dealColl = collection(this.firestore, 'deals');
+    this.deals$ = collectionData(dealColl, { idField: 'dealId' });
+    this.deals$.subscribe((deal: any) => {
+      this.deal = deal;
+      this.allDeals = deal;
+      console.log('Received changes from DB', this.deal);
     });
   }
+
+
+  openEditDealDialog(dealId: any): void {
+    const deal = this.allDeals.find((d: any) => d.dealId === dealId);
+    const dialog = this.dialog.open(DialogEditDealComponent);
+    dialog.componentInstance.deal = new Deal(deal);
+    dialog.componentInstance.dealId = dealId;
+    console.log('Open dialog:', dealId);
+  }
+  
 }

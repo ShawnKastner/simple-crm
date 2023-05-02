@@ -1,5 +1,11 @@
 <h1>Deal overview</h1>
 <mat-card *ngFor="let deals of allDeals" class="deal-card mt-32">
+    <button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="dealMenu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #dealMenu="matMenu">
+        <button  (click)="openEditDealDialog(deals.dealId)" mat-menu-item>Edit</button>
+    </mat-menu>
     <mat-card-content>
         <h2>{{ deals.topic }}</h2>
         <div class="deal-person-details">
