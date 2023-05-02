@@ -3,7 +3,7 @@ import { DialogAddDealComponent } from '../dialog-add-deal/dialog-add-deal.compo
 import { MatDialog } from '@angular/material/dialog';
 import { Deal } from 'src/models/deal.class';
 import { Observable } from 'rxjs';
-import { Firestore, collection, collectionData, deleteDoc, doc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc } from '@angular/fire/firestore';
 import { DialogEditDealComponent } from '../dialog-edit-deal/dialog-edit-deal.component';
 
 @Component({
@@ -17,6 +17,8 @@ export class DealsComponent implements OnInit {
   deals$!: Observable<any>;
   allDeals!: Array<any>;
   dealId!: any;
+  doneColl!: any;
+  doneId!: any;
 
   constructor(public dialog: MatDialog) { }
 
@@ -26,7 +28,7 @@ export class DealsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDeals();
-    
+    this.getDoneDeals();
   }
 
   getDeals() {
@@ -48,11 +50,35 @@ export class DealsComponent implements OnInit {
     console.log('Open dialog:', dealId);
   }
 
+  getDoneDeals() {
+    const doneColl = collection(this.firestore, 'deals-done');
+    this.deals$ = collectionData(doneColl, { idField: 'dealId' });
+    this.deals$.subscribe((doneDeals: any) => {
+      this.doneColl = doneDeals;
+      console.log(this.doneColl);
+
+    });
+  }
+
+  async doneDeal(dealId: any) {
+    const dealDoneColl = collection(this.firestore, 'deals-done');
+    const dealDocRef = doc(collection(this.firestore, 'deals'), dealId);
+
+    const dealDoc = (await getDoc(dealDocRef)).data();
+    const dealJson = JSON.parse(JSON.stringify(dealDoc));
+    await addDoc(dealDoneColl, dealJson);
+    await deleteDoc(dealDocRef);
+  }
+
   deleteDeal(dealId: any) {
     const dealColl = collection(this.firestore, 'deals');
     const docRef = doc(dealColl, dealId);
     deleteDoc(docRef);
   }
-  
-  
+
+  async deleteDealComplete(dealId: any) {
+    const dealDoneColl = collection(this.firestore, 'deals-done');
+    const docRef = doc(dealDoneColl, dealId);
+    await deleteDoc(docRef);
+  }  
 }

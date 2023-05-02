@@ -1,28 +1,59 @@
-<h1>Deal overview</h1>
-<mat-card *ngFor="let deals of allDeals" class="deal-card mt-32">
-    <button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="dealMenu">
-        <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #dealMenu="matMenu">
-        <button  (click)="openEditDealDialog(deals.dealId)" mat-menu-item>Edit</button>
-        <button  (click)="deleteDeal(deals.dealId)" mat-menu-item>Delete</button>
-    </mat-menu>
-    <mat-card-content>
-        <h2>{{ deals.topic }}</h2>
-        <div class="deal-person-details">
-            <div>
-                <span>Name:</span><br>
-                <span>E-mail:</span><br>
-                <span>Amount:</span>
-            </div>
-            <div>
-                <span>{{ deals.user.firstName }} {{ deals.user.lastName }}</span><br>
-                <span>{{ deals.user.email }}</span><br>
-                <span>{{ deals.amount }}€</span>
-            </div>
-        </div>
-    </mat-card-content>
-</mat-card>
+<h1>Deal Overview</h1>
+<div>
+    <h2>Started Deals</h2>
+    <div class="deals-container">
+        <mat-card *ngFor="let deals of allDeals" class="deal-card mt-32">
+            <button mat-icon-button class="pin-right-upper-corner" [matMenuTriggerFor]="dealMenu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #dealMenu="matMenu">
+                <button (click)="openEditDealDialog(deals.dealId)" mat-menu-item>Edit</button>
+                <button (click)="doneDeal(deals.dealId)" mat-menu-item>Done</button>
+                <button (click)="deleteDeal(deals.dealId)" mat-menu-item>Delete</button>
+            </mat-menu>
+            <mat-card-content>
+                <h2>{{ deals.topic }}</h2>
+                <div class="deal-person-details">
+                    <div>
+                        <span>Name:</span><br>
+                        <span>E-mail:</span><br>
+                        <span>Amount:</span>
+                    </div>
+                    <div>
+                        <span>{{ deals.user.firstName }} {{ deals.user.lastName }}</span><br>
+                        <span>{{ deals.user.email }}</span><br>
+                        <span>{{ deals.amount }}€</span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+<div>
+    <h2>Deals Done</h2>
+    <div class="deals-container">
+        <mat-card *ngFor="let doneDeals of doneColl" class="deal-card mt-32">
+            <button (click)="deleteDealComplete(doneDeals.dealId)" mat-icon-button class="pin-right-upper-corner">
+                <mat-icon>delete</mat-icon>
+            </button>
+            <mat-card-content>
+                <h2>{{ doneDeals.topic }}</h2>
+                <div class="deal-person-details">
+                    <div>
+                        <span>Name:</span><br>
+                        <span>E-mail:</span><br>
+                        <span>Amount:</span>
+                    </div>
+                    <div>
+                        <span>{{ doneDeals.user.firstName }} {{ doneDeals.user.lastName }}</span><br>
+                        <span>{{ doneDeals.user.email }}</span><br>
+                        <span>{{ doneDeals.amount }}€</span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
 
 
 

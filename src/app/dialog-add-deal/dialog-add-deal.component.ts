@@ -38,6 +38,7 @@ export class DialogAddDealComponent {
 
   saveDeal() {
     if (this.emptyInput()) {
+      this.loading = true;
       addDoc(collection(this.firestore, 'deals'), this.deal.toJSON()).then(() => {
         this.loading = false;
         this.dialogRef.close();
