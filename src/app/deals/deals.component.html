@@ -5,6 +5,7 @@
     </button>
     <mat-menu #dealMenu="matMenu">
         <button  (click)="openEditDealDialog(deals.dealId)" mat-menu-item>Edit</button>
+        <button  (click)="deleteDeal(deals.dealId)" mat-menu-item>Delete</button>
     </mat-menu>
     <mat-card-content>
         <h2>{{ deals.topic }}</h2>

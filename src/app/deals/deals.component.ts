@@ -3,7 +3,7 @@ import { DialogAddDealComponent } from '../dialog-add-deal/dialog-add-deal.compo
 import { MatDialog } from '@angular/material/dialog';
 import { Deal } from 'src/models/deal.class';
 import { Observable } from 'rxjs';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, deleteDoc, doc } from '@angular/fire/firestore';
 import { DialogEditDealComponent } from '../dialog-edit-deal/dialog-edit-deal.component';
 
 @Component({
@@ -47,5 +47,12 @@ export class DealsComponent implements OnInit {
     dialog.componentInstance.dealId = dealId;
     console.log('Open dialog:', dealId);
   }
+
+  deleteDeal(dealId: any) {
+    const dealColl = collection(this.firestore, 'deals');
+    const docRef = doc(dealColl, dealId);
+    deleteDoc(docRef);
+  }
+  
   
 }
