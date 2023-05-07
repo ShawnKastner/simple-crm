@@ -34,6 +34,11 @@ import { DialogEditDealComponent } from './dialog-edit-deal/dialog-edit-deal.com
 import { NewsComponent } from './news/news.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewsapiService } from './newsapi.service';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { LayoutModule } from '@angular/cdk/layout';
+import { NgChartsModule } from 'ng2-charts';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+
 
 @NgModule({
   declarations: [
@@ -48,6 +53,8 @@ import { NewsapiService } from './newsapi.service';
     DialogAddDealComponent,
     DialogEditDealComponent,
     NewsComponent,
+    BarChartComponent,
+
   ],
   imports: [
     provideFirebaseApp(() => initializeApp(environment.firebase)),
@@ -70,7 +77,10 @@ import { NewsapiService } from './newsapi.service';
     MatCardModule,
     MatMenuModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatGridListModule,
+    LayoutModule,
+    NgChartsModule,
   ],
   providers: [NewsapiService],
   bootstrap: [AppComponent]
