@@ -10,7 +10,7 @@ import { User } from 'src/models/user.class';
 })
 export class DialogEditAddressComponent {
   private firestore: Firestore = inject(Firestore);
-  user!: User;
+  user: User = new User();
   loading = false;
   userId!: any;
 

@@ -11,7 +11,7 @@ import { Deal } from 'src/models/deal.class';
 export class DialogEditDealComponent implements OnInit{
   private firestore: Firestore = inject(Firestore);
   loading = false;
-  deal!: Deal;
+  deal: Deal = new Deal();
   dealId!: any;
 
   constructor(public dialogRef: MatDialogRef<DialogEditDealComponent>) { }

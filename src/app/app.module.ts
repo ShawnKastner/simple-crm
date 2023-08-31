@@ -39,7 +39,6 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { NgChartsModule } from 'ng2-charts';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
